@@ -80,10 +80,6 @@
 * **"Meaty" Problems**
   * Team will break down into pairs to conduct pair programming to tackle difficult problems that we cannot solve during our normal work flow
 
-### Presentation Deck
-
-https://docs.google.com/presentation/d/1UmiJghxlB-vFz7o9l9rRSX3cgabhlFQUr6bnTTfseH0/edit?usp=sharing
-
 ### Git Process
 
 * All documents and files associated with the project, other than out Task Tracker and Pitch Deck, will live on GitHub
@@ -97,3 +93,10 @@ https://docs.google.com/presentation/d/1UmiJghxlB-vFz7o9l9rRSX3cgabhlFQUr6bnTTfs
   * The pull request *must* be reviewed by a minimum of two other team members
   * Once the code has been reviewed, the team will merge the feature branch onto the working branch
   * Once all features are completed, the whole team will approve merging into the main branch
+
+### Links & References
+
+[Presentation Pitch Deck](https://docs.google.com/presentation/d/1UmiJghxlB-vFz7o9l9rRSX3cgabhlFQUr6bnTTfseH0/edit?usp=sharing)<br>
+
+
+
