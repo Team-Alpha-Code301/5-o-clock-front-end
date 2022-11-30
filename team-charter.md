@@ -94,9 +94,7 @@
   * Once the code has been reviewed, the team will merge the feature branch onto the working branch
   * Once all features are completed, the whole team will approve merging into the main branch
 
-### Links & References
 
-[Presentation Pitch Deck](https://docs.google.com/presentation/d/1UmiJghxlB-vFz7o9l9rRSX3cgabhlFQUr6bnTTfseH0/edit?usp=sharing)<br>
 
 
 
