@@ -14,5 +14,6 @@
 
 [Presentation Pitch Deck](https://docs.google.com/presentation/d/1UmiJghxlB-vFz7o9l9rRSX3cgabhlFQUr6bnTTfseH0/edit?usp=sharing)<br>
 [Trello Board](https://trello.com/b/oCAL1mup/301-final)<br>
-[Wireframes]()<br>
+[Miro Board including Wireframes, Domain Model & Database Schema Diagram](https://miro.com/app/board/uXjVP-D3b5E=/)<br>
+[Software Requirements](/requirements.md)<br>
 [Team Charter](/team-charter.md)
