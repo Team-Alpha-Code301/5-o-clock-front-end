@@ -11,33 +11,33 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: black !important;
-  color:white !important;
+  background-color: black;
+  color:white;
 }
 
 .loginButton {
-  background-color: black !important;
+  background-color: black;
 }
 
 .loginButton:hover{
-  background-color:black !important;
-  color: rgb(255, 0, 149) !important;
+  background-color:black;
+  color: rgb(255, 0, 149);
   font-size: x-large;
   font-family: cursive; 
 }
 
 .logoutButton {
-  background-color: white !important;
-  color:black !important;
+  background-color: black;
+  color:white;
 }
 
 .logoutButton:hover {
-  background-color: white !important;
-  color:black !important;
+  background-color: white;
+  color:black;
   font-weight: bolder;
   font-family: cursive;
 }
 
  body {
-  background-color: black !important;
+  background-color: black;
 }

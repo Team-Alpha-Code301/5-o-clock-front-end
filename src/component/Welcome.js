@@ -1,7 +1,6 @@
-import React from "react";
+import React from 'react';
 import LoginButton from './LoginButton';
-import { Card } from "react-bootstrap";
-import 'bootstrap/dist/css/bootstrap.min.css';
+import { Card } from 'react-bootstrap';
 import './Welcome.css';
 
 class Welcome extends React.Component {

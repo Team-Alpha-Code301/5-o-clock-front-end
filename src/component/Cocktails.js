@@ -5,7 +5,6 @@ import Footer from '../Footer';
 import { withAuth0 } from '@auth0/auth0-react';
 import FrontPage from './FrontPage';
 // import { Button } from 'react-bootstrap';
-import 'bootstrap/dist/css/bootstrap.min.css';
 
 class Cocktails extends React.Component {
 

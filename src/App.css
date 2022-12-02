@@ -1,10 +1,20 @@
 .webName {
   font-size:xx-large;
   font-weight:900;
+  color:aliceblue;
+}
+
+.links {
+  display:flex;
+  justify-content: space-between;
+}
+
+.nav-link {
+  color:aliceblue;
 }
 
 .nav-link:hover {
-  color:rgb(153, 255, 0) !important;
+  color:rgb(153, 255, 0);
   font-size:large;
   font-weight: bolder;
 }
