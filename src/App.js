@@ -1,7 +1,5 @@
 import React from 'react';
 import Cocktails from './component/Cocktails';
-// import LoginButton from './component/LoginButton';
-// import LogoutButton from './component/LogoutButton';
 import { withAuth0 } from '@auth0/auth0-react';
 // import AboutUs from './component/AboutUs';
 import Welcome from './component/Welcome';
