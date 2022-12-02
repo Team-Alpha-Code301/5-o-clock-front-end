@@ -45,7 +45,6 @@ class Cocktails extends React.Component {
         this.setState({
           cocktails: cocktailResults.data
         });
-        
       }
     } catch (error) {
       console.log('we have an error: ', error.response.data);
@@ -55,8 +54,6 @@ class Cocktails extends React.Component {
   componentDidMount = () => {
     this.getCocktails();
   };
-
-  
 
   render() {
     console.log(this.state.cocktails);
