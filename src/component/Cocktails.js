@@ -15,7 +15,7 @@ class Cocktails extends React.Component {
       cocktails: [],
       isModalShown: false,
     };
-  } 
+  }
 
   getCocktails = async () => {
     try {
