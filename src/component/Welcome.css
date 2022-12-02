@@ -1,0 +1,43 @@
+.card {
+  margin:auto;
+  margin-top:15rem;
+}
+
+.card:hover {
+  background-color: pink;
+}
+
+.cardLoginButton {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: black !important;
+  color:white !important;
+}
+
+.loginButton {
+  background-color: black !important;
+}
+
+.loginButton:hover{
+  background-color:black !important;
+  color: rgb(255, 0, 149) !important;
+  font-size: x-large;
+  font-family: cursive; 
+}
+
+.logoutButton {
+  background-color: white !important;
+  color:black !important;
+}
+
+.logoutButton:hover {
+  background-color: white !important;
+  color:black !important;
+  font-weight: bolder;
+  font-family: cursive;
+}
+
+ body {
+  background-color: black !important;
+}

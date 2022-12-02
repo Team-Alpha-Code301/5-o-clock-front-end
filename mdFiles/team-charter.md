@@ -93,8 +93,3 @@
   * The pull request *must* be reviewed by a minimum of two other team members
   * Once the code has been reviewed, the team will merge the feature branch onto the working branch
   * Once all features are completed, the whole team will approve merging into the main branch
-
-
-
-
-
