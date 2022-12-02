@@ -15,10 +15,7 @@ class Cocktails extends React.Component {
       cocktails: [],
       isModalShown: false,
     };
-  }
-
-  
-
+  } 
 
   getCocktails = async () => {
     try {
@@ -37,7 +34,7 @@ class Cocktails extends React.Component {
           baseURL: process.env.REACT_APP_SERVER,
           url: '/getcocktails',
           headers: {
-            "Authorization": `Bearer ${jwt}`
+            'Authorization': `Bearer ${jwt}`
           }
         };
 
