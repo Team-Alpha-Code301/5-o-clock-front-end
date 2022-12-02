@@ -17,7 +17,8 @@ class Cocktails extends React.Component {
     };
   }
 
-  getCocktails = async () => {
+  getCocktails = async (ingredient) => {
+    console.log('here');
     try {
       if (this.props.auth0.isAuthenticated) {
 
@@ -27,22 +28,23 @@ class Cocktails extends React.Component {
         // extract the token from the response
         // MUST use double underscore
         const jwt = res.__raw;
-        console.log(jwt);
+        // console.log(jwt);
 
         let config = {
           method: 'get',
           baseURL: process.env.REACT_APP_SERVER,
           url: '/getcocktails',
+          params: {i:`${ingredient}`},
           headers: {
             'Authorization': `Bearer ${jwt}`
           }
         };
 
         let cocktailResults = await axios(config);
+        console.log(cocktailResults.data);
         this.setState({
           cocktails: cocktailResults.data
         });
-        console.log(cocktailResults);
       }
     } catch (error) {
       console.log('we have an error: ', error.response.data);
@@ -53,16 +55,13 @@ class Cocktails extends React.Component {
     this.getCocktails();
   };
 
-  // handleAddCocktail = async(cocktail) => {
-
-  // }
-
   render() {
+    console.log(this.state.cocktails);
     return (
       <>
         <Header />
         <FrontPage />
-        <CocktailForm getCocktails={this.getCocktails}/>
+        <CocktailForm getCocktails={this.getCocktails} cocktailsData={this.state.cocktails}/>
         <Footer />
       </>
     );
