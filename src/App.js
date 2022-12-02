@@ -1,10 +1,9 @@
 import React from 'react';
 import Cocktails from './component/Cocktails';
 import { withAuth0 } from '@auth0/auth0-react';
-// import AboutUs from './component/AboutUs';
+import AboutUs from './component/AboutUs';
 import Welcome from './component/Welcome';
 import Profile from './component/Profile';
-import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.css';
 import {
   BrowserRouter as Router,
@@ -28,11 +27,11 @@ class App extends React.Component {
               >
               </Route>
 
-              {/* <Route
+              <Route
                 exact path="/about"
                 element={<AboutUs />}
               >
-              </Route> */}
+              </Route>
 
               <Route
                 exact path="/profile"
