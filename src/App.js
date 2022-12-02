@@ -4,6 +4,7 @@ import { withAuth0 } from '@auth0/auth0-react';
 import AboutUs from './component/AboutUs';
 import Welcome from './component/Welcome';
 import Profile from './component/Profile';
+import CocktailsList from './component/CocktailList';
 import './App.css';
 import {
   BrowserRouter as Router,
@@ -24,6 +25,12 @@ class App extends React.Component {
               <Route
                 exact path="/"
                 element={<Cocktails />}
+              >
+              </Route>
+
+              <Route
+                exact path="/barCart"
+                element={<CocktailsList />}
               >
               </Route>
 

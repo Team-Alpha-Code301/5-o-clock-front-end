@@ -7,6 +7,7 @@ class CocktailForm extends React.Component {
     let selectedIngredient = e.target.ingredient.value;
     console.log(selectedIngredient);
     this.props.getCocktails(selectedIngredient);
+    console.log(this.props.getCocktails);
   };
   render() {
     return (
