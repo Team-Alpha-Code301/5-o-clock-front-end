@@ -1,7 +1,6 @@
-import { useAuth0 } from "@auth0/auth0-react";
-import React from "react";
-import { Button } from "react-bootstrap";
-import 'bootstrap/dist/css/bootstrap.min.css';
+import { useAuth0 } from '@auth0/auth0-react';
+import React from 'react';
+import { Button } from 'react-bootstrap';
 import './Welcome.css';
 
 const LogoutButton = () => {

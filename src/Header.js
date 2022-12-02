@@ -1,7 +1,7 @@
 import React from 'react';
 import AuthButtons from './component/AuthButtons';
 import { Navbar, NavItem } from 'react-bootstrap';
-import { Link } from "react-router-dom";
+import { Link } from 'react-router-dom';
 import './App.css';
 
 class Header extends React.Component {

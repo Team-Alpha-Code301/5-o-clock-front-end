@@ -14,7 +14,7 @@ class FrontPage extends React.Component {
           <Carousel.Item >
             <img
               className="d-block w-100"
-              src={require("../image/moscow mule.jpg")}
+              src={require('../image/moscow mule.jpg')}
               alt="Moscow Mule"
             />
             <Carousel.Caption>
@@ -34,7 +34,7 @@ class FrontPage extends React.Component {
           <Carousel.Item>
             <img
               className="d-block w-100"
-              src={require("../image/mai tai.jpg")}
+              src={require('../image/mai tai.jpg')}
               alt="Mai Tai"
             />
 
@@ -56,7 +56,7 @@ class FrontPage extends React.Component {
           <Carousel.Item>
             <img
               className="d-block w-100"
-              src={require("../image/mojito.jpg")}
+              src={require('../image/mojito.jpg')}
               alt="Mojito"
             />
 
@@ -80,7 +80,7 @@ class FrontPage extends React.Component {
           <Carousel.Item>
             <img
               className="d-block w-100"
-              src={require("../image/Aperol Spritz.jpg")}
+              src={require('../image/Aperol Spritz.jpg')}
               alt="Spritz"
             />
 
@@ -101,7 +101,7 @@ class FrontPage extends React.Component {
           <Carousel.Item>
             <img
               className="d-block w-100"
-              src={require("../image/Mezcal Margarita.jpg")}
+              src={require('../image/Mezcal Margarita.jpg')}
               alt="Mezcal Margarita"
             />
 
