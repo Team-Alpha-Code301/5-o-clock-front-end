@@ -17,7 +17,7 @@ class BarCart extends React.Component {
         const jwt = res.__raw;
         console.log(jwt);
         let config = {
-          method: 'post',
+          method: 'put',
           data: {
             email: this.props.auth0.user.email,
             barCartItems: this.state.barCartItems
@@ -34,7 +34,7 @@ class BarCart extends React.Component {
         })
       }
     } catch (e) {
-      console.log('POST Error: ', error.response.data);
+      console.log('PUT Error: ', error.response.data);
     }
   }
 
