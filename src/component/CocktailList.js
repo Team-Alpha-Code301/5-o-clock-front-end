@@ -2,6 +2,7 @@ import React from 'react';
 import { Card, Col } from 'react-bootstrap';
 
 class CocktailsList extends React.Component {
+
   render() {
 
     return (
@@ -9,10 +10,10 @@ class CocktailsList extends React.Component {
         <Col>
           <Card style={{ width: '18rem' }} >
             <Card.Img
+              onClick={(this.props.showModal)}
               src={this.props.src}
               alt={this.props.name}
               title={this.props.name}
-            // onClick={(this.props.openModal)}
             />
             <Card.Body>
               <Card.Title>{this.props.name}</Card.Title>

@@ -4,6 +4,7 @@ import Header from '../Header';
 import Footer from '../Footer';
 import { withAuth0 } from '@auth0/auth0-react';
 import CocktailForm from './CocktailForm';
+import CocktailsModal from './CocktailsModal';
 
 class Cocktails extends React.Component {
 
@@ -11,9 +12,26 @@ class Cocktails extends React.Component {
     super(props);
     this.state = {
       cocktails: [],
+      userCocktails: [],
       isModalShown: false,
+      modalImage: '',
+      modalName: ''
     };
   }
+
+  showModal = (image,name) => {
+    this.setState({
+      isModalShown: true,
+      modalImage: image,
+      modalName: name
+    });
+  };
+
+  hideModal = () => {
+    this.setState({
+      isModalShown: false
+    });
+  };
 
   getCocktails = async (ingredient) => {
     try {
@@ -47,6 +65,13 @@ class Cocktails extends React.Component {
     }
   };
 
+  handleGetCocktails = (e) => {
+    e.preventDefault();
+    let selectedIngredient = e.target.ingredient.value;
+    console.log(selectedIngredient);
+    this.getCocktails(selectedIngredient);
+  };
+
   componentDidMount = () => {
     this.getCocktails();
   };
@@ -56,7 +81,22 @@ class Cocktails extends React.Component {
     return (
       <>
         <Header />
-        <CocktailForm getCocktails={this.getCocktails} cocktailsData={this.state.cocktails}/>
+
+        <CocktailForm
+          handleGetCocktails={this.handleGetCocktails}
+          cocktailsData={this.state.cocktails}
+          showModal={this.showModal}
+        />
+
+        <CocktailsModal
+          showModal={this.showModal}
+          hideModal={this.hideModal}
+          cocktailsData={this.state.cocktails}
+          isModalShown={this.state.isModalShown}
+          modalImage={this.state.modalImage}
+          modalName={this.state.modalName}
+        />
+
         <Footer />
       </>
     );
