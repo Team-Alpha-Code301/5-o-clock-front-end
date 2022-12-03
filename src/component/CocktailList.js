@@ -1,14 +1,25 @@
 import React from 'react';
-import Footer from '../Footer';
-import Header from '../Header';
+import { Card, Col } from 'react-bootstrap';
 
 class CocktailsList extends React.Component {
   render() {
-    return(
+
+    return (
       <>
-        <Header/>
-        <h2>filler</h2>
-        <Footer/>
+        <Col>
+          <Card style={{ width: '18rem' }} >
+            <Card.Img
+              src={this.props.src}
+              alt={this.props.name}
+              title={this.props.name}
+            // onClick={(this.props.openModal)}
+            />
+            <Card.Body>
+              <Card.Title>{this.props.name}</Card.Title>
+              {/* <Button onClick={this.handleFav} className='button'>Pick Me!</Button> */}
+            </Card.Body>
+          </Card>
+        </Col>
       </>
     );
   }

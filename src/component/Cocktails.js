@@ -3,9 +3,7 @@ import axios from 'axios';
 import Header from '../Header';
 import Footer from '../Footer';
 import { withAuth0 } from '@auth0/auth0-react';
-import FrontPage from './FrontPage';
 import CocktailForm from './CocktailForm';
-// import { Button } from 'react-bootstrap';
 
 class Cocktails extends React.Component {
 
@@ -18,7 +16,6 @@ class Cocktails extends React.Component {
   }
 
   getCocktails = async (ingredient) => {
-    console.log('here');
     try {
       if (this.props.auth0.isAuthenticated) {
 
@@ -41,7 +38,6 @@ class Cocktails extends React.Component {
         };
 
         let cocktailResults = await axios(config);
-        console.log(cocktailResults.data);
         this.setState({
           cocktails: cocktailResults.data
         });
@@ -60,7 +56,6 @@ class Cocktails extends React.Component {
     return (
       <>
         <Header />
-        <FrontPage />
         <CocktailForm getCocktails={this.getCocktails} cocktailsData={this.state.cocktails}/>
         <Footer />
       </>
