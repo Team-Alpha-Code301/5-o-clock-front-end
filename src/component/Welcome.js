@@ -12,7 +12,7 @@ class Welcome extends React.Component {
             <img className="card-img-top" src="https://images.all-free-download.com/images/graphiclarge/delicate_martini_glass_vector_572483.jpg" alt="Card image cap" />
 
             <Card.Text className="cardLoginButton">
-              {<LoginButton />}
+              <LoginButton />
             </Card.Text>
           </Card.Body>
         </Card>

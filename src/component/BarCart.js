@@ -1,5 +1,7 @@
 import React from 'react';
 import { withAuth0 } from '@auth0/auth0-react';
+import ListGroup from "react-bootstrap/ListGroup";
+import axios from 'axios';
 
 class BarCart extends React.Component {
 
@@ -34,7 +36,7 @@ class BarCart extends React.Component {
         })
       }
     } catch (e) {
-      console.log('PUT Error: ', error.response.data);
+      console.log('PUT Error: ', e.response.data);
     }
   }
 
