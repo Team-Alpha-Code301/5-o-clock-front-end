@@ -9,7 +9,7 @@ class AboutUs extends React.Component {
     return (
       <>
         <Header />
-        <h3>hello</h3>
+        
         <Footer />
       </>
     );
