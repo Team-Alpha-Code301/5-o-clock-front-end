@@ -9,20 +9,23 @@ class CocktailsModal extends React.Component {
   };
 
   render() {
+    // console.log(this.props.displayCocktail)
 
     return (
 
       <Modal className="modalDisplay" show={this.props.isModalShown}>
         <Modal.Header closeButton onClick={this.CloseModal}>
-          <Modal.Title>{this.props.modalName}</Modal.Title>
+          <Modal.Title>{this.props.name}</Modal.Title>
         </Modal.Header>
 
         <Modal.Body>
           <img
-            src={this.props.modalImage}
-            alt={this.props.modalName}
-            // width='466px'
+            src={this.props.img}
+            alt={this.props.name}
+            width='466px'
           />
+          {/* <p>{this.props.displayCocktail.ingredients}</p>
+          <p>{this.props.displayCocktail.instructions}</p> */}
         </Modal.Body>
 
         <Modal.Footer>

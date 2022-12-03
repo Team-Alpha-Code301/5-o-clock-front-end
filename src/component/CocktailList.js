@@ -3,6 +3,13 @@ import { Card, Col } from 'react-bootstrap';
 
 class CocktailsList extends React.Component {
 
+  handleModal = (e) => {
+    e.preventDefault();
+    this.props.showModal(this.props.src, this.props.name);
+    // this.props.getModalCocktail(this.props.name);
+    console.log(this.props.name);
+  }
+
   render() {
 
     return (
@@ -10,14 +17,13 @@ class CocktailsList extends React.Component {
         <Col>
           <Card style={{ width: '18rem' }} >
             <Card.Img
-              onClick={(this.props.showModal)}
+              onClick={this.handleModal}
               src={this.props.src}
               alt={this.props.name}
               title={this.props.name}
             />
             <Card.Body>
               <Card.Title>{this.props.name}</Card.Title>
-              {/* <Button onClick={this.handleFav} className='button'>Pick Me!</Button> */}
             </Card.Body>
           </Card>
         </Col>
