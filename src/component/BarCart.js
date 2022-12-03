@@ -52,6 +52,7 @@ class BarCart extends React.Component {
   };
 
   render() {
+    
     return (
       <>
         <ListGroup variant="flush">
