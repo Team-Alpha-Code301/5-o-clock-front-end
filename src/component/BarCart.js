@@ -10,6 +10,19 @@ class BarCart extends React.Component {
     }
   }
 
+  // findUser = async () => {
+  //   // get user by ID to see if they exist
+  //   let email = this.props.auth0.user.email;
+  //   let foundUser = await axios.get(`${process.env.REACT_APP_SERVER}/users/${email}`);
+  //   // if user exists, put their barCartItems into state
+  //   // if not, create new user with empty array of barCartItems
+  //   if (foundUser.email === email) {
+  //     this.setState({
+  //       barCartItems: [this.state.barCartItems]
+  //     });
+  //   }
+  // }
+
   addToCart = async (ingredient) => {
     try {
       if (this.props.auth0.isAuthenticated) {
@@ -17,35 +30,28 @@ class BarCart extends React.Component {
         const jwt = res.__raw;
         console.log(jwt);
         let config = {
-          method: 'post',
+          method: 'put',
           data: {
             email: this.props.auth0.user.email,
-            barCartItems: this.state.barCartItems
+            barCartItems: ingredient
           },
           baseURL: process.env.REACT_APP_SERVER,
-          url: '/barcart',
+          url: `/users/${this.props.auth0.user.email}`,
           headers: {
             'Authorization': `Bearer ${jwt}`
           }
         };
-        let newBarItem = await axios(config);
+        await axios(config);
         this.setState({
           barCartItems: [...this.state.barCartItems, ingredient]
         })
       }
     } catch (e) {
-      console.log('POST Error: ', error.response.data);
+      console.log('PUT Error: ', error.response.data);
     }
   }
 
-  findUser = async () => {
-    // get user by ID to see if they exist
-    let email = this.props.auth0.user.email;
-    let foundUser = await axios.get(`${process.env.REACT_APP_SERVER}/users/${email}`);
-    // if user exists, put their barCartItems into state
-    // if not, create new user with empty array of barCartItems
-    
-  }
+
 
   componentDidMount = () => {
     this.findUser();
