@@ -2,9 +2,10 @@ import React from 'react';
 import { withAuth0 } from '@auth0/auth0-react';
 import ListGroup from "react-bootstrap/ListGroup";
 import axios from 'axios';
+import { Button } from 'react-bootstrap';
 
 class BarCart extends React.Component {
-
+ 
   constructor(props) {
     super(props);
     this.state = {
@@ -12,18 +13,33 @@ class BarCart extends React.Component {
     }
   }
 
-  // findUser = async () => {
-  //   // get user by ID to see if they exist
-  //   let email = this.props.auth0.user.email;
-  //   let foundUser = await axios.get(`${process.env.REACT_APP_SERVER}/users/${email}`);
-  //   // if user exists, put their barCartItems into state
-  //   // if not, create new user with empty array of barCartItems
-  //   if (foundUser.email === email) {
-  //     this.setState({
-  //       barCartItems: [this.state.barCartItems]
-  //     });
-  //   }
-  // }
+  getBarCart = async () => {
+    try {
+      if (this.props.auth0.isAuthenticated) {
+        const res = await this.props.auth0.getIdTokenClaims();
+        const jwt = res.__raw;
+        console.log(jwt);
+        let config = {
+          method: 'get',
+          baseURL: process.env.REACT_APP_SERVER,
+          url: `/users/${this.props.auth0.user.email}`,
+          headers: {
+            'Authorization': `Bearer ${jwt}`
+          }
+        };
+        await axios(config)
+        .then(res => {
+          console.log('inside barcart:', res.data);
+
+          this.setState({
+            barCartItems: res.data.barCartItems
+          });
+        })
+      }
+    } catch (e) {
+      console.log('GET Error: ', e.response.data);
+    }
+  }
 
   addToCart = async (ingredient) => {
     try {
@@ -35,7 +51,7 @@ class BarCart extends React.Component {
           method: 'put',
           data: {
             email: this.props.auth0.user.email,
-            barCartItems: ingredient
+            barCartItems: this.state.barCartItems
           },
           baseURL: process.env.REACT_APP_SERVER,
           url: `/users/${this.props.auth0.user.email}`,
@@ -53,10 +69,33 @@ class BarCart extends React.Component {
     }
   }
 
-
+  deleteBarCart = async () => {
+    let email = this.props.auth0.user.email;
+    try {
+      if (this.props.auth0.isAuthenticated) {
+        const res = await this.props.auth0.getIdTokenClaims();
+        const jwt = res.__raw;
+        console.log(jwt);
+        let config = {
+          method: 'delete',
+          baseURL: process.env.REACT_APP_SERVER,
+          url: `/users/${email}`,
+          headers: {
+            'Authorization': `Bearer ${jwt}`
+          }
+        };
+        await axios(config);
+        this.setState({
+          barCartItems: []
+        })
+      }
+    } catch (e) {
+      console.log('DELETE Error: ', e.response.data);
+    }
+  }
 
   componentDidMount = () => {
-    this.findUser();
+    this.getBarCart();
   };
 
   render() {
@@ -65,9 +104,13 @@ class BarCart extends React.Component {
       <>
         <ListGroup variant="flush">
           <ListGroup.Item>
-            {/* bar cart items */}
+            {this.props.selectedIngredient}
           </ListGroup.Item>
         </ListGroup>
+        <Button 
+        type='submit'>
+          Delete Bar Cart
+        </Button>
       </>
     );
   }

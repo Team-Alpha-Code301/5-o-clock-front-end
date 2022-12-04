@@ -5,6 +5,7 @@ import Footer from '../Footer';
 import { withAuth0 } from '@auth0/auth0-react';
 import CocktailForm from './CocktailForm';
 import CocktailsModal from './CocktailsModal';
+import BarCart from './BarCart';
 import './Welcome.css';
 
 class Cocktails extends React.Component {
@@ -17,7 +18,8 @@ class Cocktails extends React.Component {
       // displayCocktail: [],
       isModalShown: false,
       modalImage: '',
-      modalName: ''
+      modalName: '',
+      selectedIngredient: ''
     };
   }
 
@@ -25,6 +27,7 @@ class Cocktails extends React.Component {
     // get user by ID to see if they exist
     let email = this.props.auth0.user.email;
     let foundUser = await axios.get(`${process.env.REACT_APP_SERVER}/users/${email}`);
+    console.log('here is foundUser', foundUser);
     // if user exists, put their barCartItems into state
     // if not, create new user with empty array of barCartItems
     try {
@@ -33,7 +36,8 @@ class Cocktails extends React.Component {
         const jwt = res.__raw;
         console.log(jwt);
         //create user if no user found in db
-        if(!foundUser){
+        if(!foundUser.data.email){
+          console.log('no user found');
           let config = {
             method: 'post',
             data: {
@@ -41,7 +45,7 @@ class Cocktails extends React.Component {
               barCartItems: [this.state.barCartItems]
             },
             baseURL: process.env.REACT_APP_SERVER,
-            url: `/users/${this.props.auth0.user.email}`,
+            url: `/users`,
             headers: {
               'Authorization': `Bearer ${jwt}`
             }
@@ -49,6 +53,7 @@ class Cocktails extends React.Component {
           await axios(config);
         }
         //after user found/created, update state for UI
+        console.log('user found/created');
         this.setState({
           user: {
             email: this.props.auth0.user.email,
@@ -74,6 +79,35 @@ class Cocktails extends React.Component {
       isModalShown: false
     });
   };
+
+  addToCart = async (ingredient) => {
+    try {
+      if (this.props.auth0.isAuthenticated) {
+        const res = await this.props.auth0.getIdTokenClaims();
+        const jwt = res.__raw;
+        console.log(jwt);
+        console.log('putting item in: ', ingredient);
+        let config = {
+          method: 'put',
+          data: {
+            email: this.props.auth0.user.email,
+            barCartItems: ingredient
+          },
+          baseURL: process.env.REACT_APP_SERVER,
+          url: `/users/${this.props.auth0.user.email}`,
+          headers: {
+            'Authorization': `Bearer ${jwt}`
+          }
+        };
+        await axios(config);
+        this.setState({
+          barCartItems: [...this.state.barCartItems, ingredient]
+        })
+      }
+    } catch (e) {
+      console.log('PUT Error: ', e.response.data);
+    }
+  }
 
   getCocktails = async (ingredient) => {
 
@@ -146,10 +180,15 @@ class Cocktails extends React.Component {
     let selectedIngredient = e.target.ingredient.value;
     console.log(selectedIngredient);
     this.getCocktails(selectedIngredient);
+    this.addToCart(selectedIngredient);
+    this.setState({
+      selectedIngredient: selectedIngredient
+    });
   };
   
   componentDidMount = () => {
     this.getCocktails();
+    this.findUser();
     // this.getModalCocktail();
   };
   
@@ -167,6 +206,10 @@ class Cocktails extends React.Component {
           showModal={this.showModal}
           // getModalCocktail={this.getModalCocktail}
         />
+
+        {this.state.selectedIngredient && <BarCart 
+          selectedIngredient={this.state.selectedIngredient}
+        />}
 
         <CocktailsModal
           isModalShown={this.state.isModalShown}
