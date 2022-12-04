@@ -1,7 +1,7 @@
 import React from 'react';
 import { Button, Form, Container, Row } from 'react-bootstrap';
 import CocktailsList from './CocktailList';
-import '../App.css';
+import './Welcome.css';
 
 class CocktailForm extends React.Component {
 
@@ -23,7 +23,7 @@ class CocktailForm extends React.Component {
             <Form.Label>Type Your Ingredient</Form.Label>
             <Form.Control type="text" placeholder="Enter Ingredient Name" />
           </Form.Group>
-          <Button type='submit'>Submit</Button>
+          <Button className="formSubmitButton" type='submit'>Submit</Button>
         </Form>
         <Container>
           <Row>
