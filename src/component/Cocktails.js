@@ -6,6 +6,7 @@ import { withAuth0 } from '@auth0/auth0-react';
 import CocktailForm from './CocktailForm';
 import CocktailsModal from './CocktailsModal';
 import BarCart from './BarCart';
+import './Welcome.css';
 
 class Cocktails extends React.Component {
 
@@ -197,7 +198,7 @@ class Cocktails extends React.Component {
     return (
       <>
         <Header />
-
+        
         <CocktailForm
           handleGetCocktails={this.handleGetCocktails}
           cocktailsData={this.state.cocktails}

@@ -23,10 +23,32 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  margin:auto;
-  height:500px;
+  margin: auto;
+  height: 500px;
+}
+
+.footerText {
+  color: white;
+  font-weight: bolder;
+}
+
+.ExploreButton {
+  color:rgb(243, 207, 140);
+  background-color: black;
+  border: none;
+}
+
+.ExploreButton:hover {
+  color:orange;
+  background-color: black;
+  font-weight: bolder;
 }
 
 li {
   list-style: none;
+}
+
+body {
+  /* background-image: url(./image/bar.jpg); */
+  background-color: black;
 }
