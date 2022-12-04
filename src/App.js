@@ -24,7 +24,7 @@ class App extends React.Component {
             <Routes>
               <Route
                 exact path="/"
-                element={<FrontPage />}
+                element={<FrontPage/>}
               >
               </Route>
 
@@ -48,6 +48,7 @@ class App extends React.Component {
             </Routes>
             : <Routes>
               <Route
+                id="Welcome"
                 exact path="/"
                 element={<Welcome />}
               >

@@ -17,18 +17,20 @@
 
 .loginButton {
   background-color: black;
+  border:none;
 }
 
 .loginButton:hover{
   background-color:black;
   color: rgb(255, 0, 149);
   font-size: x-large;
-  font-family: cursive; 
+  font-family: cursive;
 }
 
 .logoutButton {
   background-color: black;
   color:white;
+  border:none;
 }
 
 .logoutButton:hover {
@@ -39,9 +41,50 @@
 }
 
 .formSubmit {
-  
+  color:white;
 }
 
- body {
+.formSubmitButton {
   background-color: black;
+  color:rgb(205, 205, 101);
+  font-family: cursive;
+  border: none;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.formSubmitButton:hover {
+  background-color: black;
+  color: rgb(255, 255, 0);
+  font-weight: bolder;
+}
+
+.Welcome {
+  animation:fadeOutBackground 20s;
+  animation-fill-mode: forwards;
+}
+
+/* @keyframes fadeInBackground {
+  from{background-color:black;}
+  to{background-color:pink}
+} */
+
+@keyframes fadeOutBackground {
+  from{background-color:black;}
+  to{background-color:pink}
+}
+
+h3 {
+  color:white;
+}
+
+p {
+  color: white;
+}
+
+.right {
+  display: flex;
+  justify-content: right;
+  text-align: right;
 }
