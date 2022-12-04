@@ -1,23 +1,36 @@
 import React from 'react';
-import { Button, Form } from 'react-bootstrap';
+import { Button, Form, Container, Row } from 'react-bootstrap';
+import CocktailsList from './CocktailList';
+import '../App.css';
 
 class CocktailForm extends React.Component {
-  handleGetCocktails = (e) => {
-    e.preventDefault();
-    let selectedIngredient = e.target.ingredient.value;
-    console.log(selectedIngredient);
-    this.props.getCocktails(selectedIngredient);
-    console.log(this.props.getCocktails);
-  };
+
   render() {
+    let cocktailArr = this.props.cocktailsData.length ? this.props.cocktailsData.map((cocktail) =>
+      <CocktailsList
+        showModal={this.props.showModal}
+        // getModalCocktail={this.props.getModalCocktail}
+        key={cocktail.id}
+        name={cocktail.name}
+        src={cocktail.src}
+      />
+    ) : [];
+
     return (
-      <Form onSubmit={this.handleGetCocktails}>
-        <Form.Group className="cocktailForm" controlId="ingredient">
-          <Form.Label>Type Your Ingredient</Form.Label>
-          <Form.Control type="text" placeholder="Enter Ingredient Name" />
-        </Form.Group>
-        <Button type='submit'>Submit</Button>
-      </Form>
+      <>
+        <Form className="formSubmit" onSubmit={this.props.handleGetCocktails}>
+          <Form.Group className="cocktailForm" controlId="ingredient">
+            <Form.Label>Type Your Ingredient</Form.Label>
+            <Form.Control type="text" placeholder="Enter Ingredient Name" />
+          </Form.Group>
+          <Button type='submit'>Submit</Button>
+        </Form>
+        <Container>
+          <Row>
+            {cocktailArr}
+          </Row>
+        </Container>
+      </>
     );
   }
 }

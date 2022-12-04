@@ -1,7 +1,10 @@
 import React from 'react';
-import { Carousel } from 'react-bootstrap';
+import { Button, Carousel } from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import '../App.css';
+import Footer from '../Footer';
+import Header from '../Header';
+import { Link } from 'react-router-dom';
 
 class FrontPage extends React.Component {
 
@@ -9,7 +12,7 @@ class FrontPage extends React.Component {
 
     return (
       <>
-
+        <Header/>
         <Carousel>
           <Carousel.Item >
             <img
@@ -121,7 +124,10 @@ class FrontPage extends React.Component {
             </Carousel.Caption>
           </Carousel.Item>
         </Carousel>
-
+        <Link to="/barCart">
+          <Button>Explore Cocktails</Button>
+        </Link>
+        <Footer/>
       </>
     );
   }

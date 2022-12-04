@@ -9,10 +9,10 @@ class Welcome extends React.Component {
       <>
         <Card className="card" style={{ width: '18rem' }}>
           <Card.Body>
-            <img className="card-img-top" src="https://images.all-free-download.com/images/graphiclarge/delicate_martini_glass_vector_572483.jpg" alt="Card image cap" />
+            <img className="card-img-top" src="https://images.all-free-download.com/images/graphiclarge/delicate_martini_glass_vector_572483.jpg" alt="cocktail" />
 
             <Card.Text className="cardLoginButton">
-              {<LoginButton />}
+              <LoginButton />
             </Card.Text>
           </Card.Body>
         </Card>
