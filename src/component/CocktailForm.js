@@ -5,6 +5,8 @@ import '../App.css';
 
 class CocktailForm extends React.Component {
 
+  
+
   render() {
     let cocktailArr = this.props.cocktailsData.length ? this.props.cocktailsData.map((cocktail) =>
       <CocktailsList
