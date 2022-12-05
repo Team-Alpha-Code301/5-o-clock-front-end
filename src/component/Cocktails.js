@@ -1,8 +1,9 @@
+import { withAuth0 } from '@auth0/auth0-react';
 import React from 'react';
 import axios from 'axios';
+
 import Header from '../Header';
 import Footer from '../Footer';
-import { withAuth0 } from '@auth0/auth0-react';
 import CocktailForm from './CocktailForm';
 import CocktailsModal from './CocktailsModal';
 import BarCart from './BarCart';
@@ -15,7 +16,7 @@ class Cocktails extends React.Component {
     this.state = {
       cocktails: [],
       user: {},
-      // displayCocktail: [],
+      displayCocktail: [],
       isModalShown: false,
       modalImage: '',
       modalName: '',
@@ -27,14 +28,13 @@ class Cocktails extends React.Component {
     // get user by ID to see if they exist
     let email = this.props.auth0.user.email;
     let foundUser = await axios.get(`${process.env.REACT_APP_SERVER}/users/${email}`);
-    console.log('here is foundUser', foundUser);
+    // console.log('here is foundUser', foundUser);
     // if user exists, put their barCartItems into state
     // if not, create new user with empty array of barCartItems
     try {
       if (this.props.auth0.isAuthenticated) {
         const res = await this.props.auth0.getIdTokenClaims();
         const jwt = res.__raw;
-        console.log(jwt);
         //create user if no user found in db
         if(!foundUser.data.email){
           console.log('no user found');
@@ -85,7 +85,6 @@ class Cocktails extends React.Component {
       if (this.props.auth0.isAuthenticated) {
         const res = await this.props.auth0.getIdTokenClaims();
         const jwt = res.__raw;
-        console.log(jwt);
         console.log('putting item in: ', ingredient);
         let config = {
           method: 'put',
@@ -120,7 +119,6 @@ class Cocktails extends React.Component {
         // extract the token from the response
         // MUST use double underscore
         const jwt = res.__raw;
-        // console.log(jwt);
 
         let config = {
           method: 'get',
@@ -142,43 +140,38 @@ class Cocktails extends React.Component {
     }
   };
 
-  // getModalCocktail = async (cocktail) => {
-  //   try {
-  //     if (this.props.auth0.isAuthenticated) {
+  getModalCocktail = async (cocktail) => {
+    try {
+      if (this.props.auth0.isAuthenticated) {
 
-  //       // get the token from Auth0
-  //       const res = await this.props.auth0.getIdTokenClaims();
+        // get the token from Auth0
+        const res = await this.props.auth0.getIdTokenClaims();
 
-  //       // extract the token from the response
-  //       // MUST use double underscore
-  //       const jwt = res.__raw;
-  //       // console.log(jwt);
-
-  //       let config = {
-  //         method: 'get',
-  //         baseURL: process.env.REACT_APP_SERVER,
-  //         url: '/displaycocktail',
-  //         params: { name: `${cocktail}` },
-  //         headers: {
-  //           'Authorization': `Bearer ${jwt}`
-  //         }
-  //       };
-        
-  //       let showCocktail = await axios(config);
-  //       console.log(showCocktail);
-  //       this.setState({
-  //         displayCocktail: showCocktail.data,
-  //       })
-  //     }
-  //   } catch (error) {
-  //     console.log('we have an error: ', error.response.data);
-  //   }
-  // }
+        // extract the token from the response
+        // MUST use double underscore
+        const jwt = res.__raw;
+        let config = {
+          method: 'get',
+          baseURL: process.env.REACT_APP_SERVER,
+          url: '/displaycocktail',
+          params: { name: `${cocktail}` },
+          headers: {
+            'Authorization': `Bearer ${jwt}`
+          }
+        };
+        let showCocktail = await axios(config);
+        this.setState({
+          displayCocktail: showCocktail.data,
+        })
+      }
+    } catch (error) {
+      console.log('we have an error: ', error.response.data);
+    }
+  }
   
   handleGetCocktails = (e) => {
     e.preventDefault();
     let selectedIngredient = e.target.ingredient.value;
-    console.log(selectedIngredient);
     this.getCocktails(selectedIngredient);
     this.addToCart(selectedIngredient);
     this.setState({
@@ -189,12 +182,10 @@ class Cocktails extends React.Component {
   componentDidMount = () => {
     this.getCocktails();
     this.findUser();
-    // this.getModalCocktail();
+    this.getModalCocktail();
   };
   
   render() {
-    // console.log(this.state.displayCocktail);
-
     return (
       <>
         <Header />
@@ -202,9 +193,9 @@ class Cocktails extends React.Component {
         <CocktailForm
           handleGetCocktails={this.handleGetCocktails}
           cocktailsData={this.state.cocktails}
-          // modalCocktail={this.state.displayCocktail}
+          modalCocktail={this.state.displayCocktail}
           showModal={this.showModal}
-          // getModalCocktail={this.getModalCocktail}
+          getModalCocktail={this.getModalCocktail}
         />
 
         {this.state.selectedIngredient && <BarCart 
@@ -213,7 +204,7 @@ class Cocktails extends React.Component {
 
         <CocktailsModal
           isModalShown={this.state.isModalShown}
-          // displayCocktail={this.state.displayCocktail}
+          displayCocktail={this.state.displayCocktail}
           hideModal={this.hideModal}
           img={this.state.modalImage}
           name={this.state.modalName}

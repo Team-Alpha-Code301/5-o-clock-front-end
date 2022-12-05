@@ -5,7 +5,7 @@ import axios from 'axios';
 import { Button } from 'react-bootstrap';
 
 class BarCart extends React.Component {
- 
+
   constructor(props) {
     super(props);
     this.state = {
@@ -18,7 +18,6 @@ class BarCart extends React.Component {
       if (this.props.auth0.isAuthenticated) {
         const res = await this.props.auth0.getIdTokenClaims();
         const jwt = res.__raw;
-        console.log(jwt);
         let config = {
           method: 'get',
           baseURL: process.env.REACT_APP_SERVER,
@@ -46,7 +45,6 @@ class BarCart extends React.Component {
       if (this.props.auth0.isAuthenticated) {
         const res = await this.props.auth0.getIdTokenClaims();
         const jwt = res.__raw;
-        console.log(jwt);
         let config = {
           method: 'put',
           data: {
@@ -75,7 +73,6 @@ class BarCart extends React.Component {
       if (this.props.auth0.isAuthenticated) {
         const res = await this.props.auth0.getIdTokenClaims();
         const jwt = res.__raw;
-        console.log(jwt);
         let config = {
           method: 'delete',
           baseURL: process.env.REACT_APP_SERVER,

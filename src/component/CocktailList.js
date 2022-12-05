@@ -6,7 +6,7 @@ class CocktailsList extends React.Component {
   handleModal = (e) => {
     e.preventDefault();
     this.props.showModal(this.props.src, this.props.name);
-    // this.props.getModalCocktail(this.props.name);
+    this.props.getModalCocktail(this.props.name);
     console.log(this.props.name);
   }
 

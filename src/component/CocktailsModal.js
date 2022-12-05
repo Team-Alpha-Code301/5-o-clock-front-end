@@ -1,15 +1,19 @@
 import React from 'react';
-import { Button, Modal} from 'react-bootstrap';
+import { Button, Modal } from 'react-bootstrap';
 import '../App.css';
 
 class CocktailsModal extends React.Component {
 
-  CloseModal=() => {
+  CloseModal = () => {
     this.props.hideModal();
   };
 
+
   render() {
-    // console.log(this.props.displayCocktail)
+
+    // let ingredient = this.props.displayCocktail.ingredients.map((item, idx) => {
+    //   return <ul key={idx}>{item[idx]}</ul>
+    // })
 
     return (
 
@@ -24,8 +28,8 @@ class CocktailsModal extends React.Component {
             alt={this.props.name}
             width='466px'
           />
-          {/* <p>{this.props.displayCocktail.ingredients}</p>
-          <p>{this.props.displayCocktail.instructions}</p> */}
+          <div>{this.props.displayCocktail.ingredients}</div>
+          <div>{this.props.displayCocktail.instruction}</div>
         </Modal.Body>
 
         <Modal.Footer>

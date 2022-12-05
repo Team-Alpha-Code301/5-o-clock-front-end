@@ -1,10 +1,12 @@
 import React from 'react';
-import Cocktails from './component/Cocktails';
-import FrontPage from './component/FrontPage';
 import { withAuth0 } from '@auth0/auth0-react';
-import AboutUs from './component/AboutUs';
+
 import Welcome from './component/Welcome';
+import FrontPage from './component/FrontPage';
+import Cocktails from './component/Cocktails';
+import AboutUs from './component/AboutUs';
 import Profile from './component/Profile';
+import BarCart from './component/BarCart';
 import './App.css';
 import {
   BrowserRouter as Router,
@@ -30,10 +32,15 @@ class App extends React.Component {
 
               <Route
                 exact path="/barCart"
-                element={<Cocktails />}
+                element={<BarCart />}
               >
               </Route>
 
+              <Route
+                exact path="/Cocktails"
+                element={<Cocktails />}
+              >
+              </Route>
               <Route
                 exact path="/about"
                 element={<AboutUs />}
