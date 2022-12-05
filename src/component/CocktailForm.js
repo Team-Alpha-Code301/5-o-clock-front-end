@@ -5,13 +5,13 @@ import './Welcome.css';
 
 class CocktailForm extends React.Component {
 
-  
+
 
   render() {
     let cocktailArr = this.props.cocktailsData.length ? this.props.cocktailsData.map((cocktail) =>
       <CocktailsList
         showModal={this.props.showModal}
-        // getModalCocktail={this.props.getModalCocktail}
+        getModalCocktail={this.props.getModalCocktail}
         key={cocktail.id}
         name={cocktail.name}
         src={cocktail.src}

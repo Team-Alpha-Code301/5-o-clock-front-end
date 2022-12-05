@@ -1,9 +1,10 @@
 import React from 'react';
-import Cocktails from './component/Cocktails';
-import FrontPage from './component/FrontPage';
 import { withAuth0 } from '@auth0/auth0-react';
-import AboutUs from './component/AboutUs';
+
 import Welcome from './component/Welcome';
+import FrontPage from './component/FrontPage';
+import Cocktails from './component/Cocktails';
+import AboutUs from './component/AboutUs';
 import Profile from './component/Profile';
 import './App.css';
 import {
@@ -33,7 +34,7 @@ class App extends React.Component {
                 element={<Cocktails />}
               >
               </Route>
-
+              
               <Route
                 exact path="/about"
                 element={<AboutUs />}
