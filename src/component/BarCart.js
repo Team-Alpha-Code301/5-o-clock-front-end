@@ -9,17 +9,20 @@ class BarCart extends React.Component {
       <>
         <ListGroup className="p-5" variant="flush">
           {
-            this.props.barCartItems.map((item, i) =>(
-              i !== 0 ? 
-              <ListGroup.Item key={i}>
-                {item}
-                <Button className="float-end" variant="danger" onClick={() => this.props.deleteOneIngredient(i)}> 
-                  Remove 
-                </Button>
-              </ListGroup.Item> : <div key={i}></div>
+            this.props.barCartItems.map((item, i) => (
+              i !== 0 ?
+                <ListGroup.Item key={i}>
+                  {item}
+                  <Button className="float-end" variant="danger" onClick={() => this.props.deleteOneIngredient(i)}>
+                    Remove
+                  </Button>
+                </ListGroup.Item> : <div key={i}></div>
             ))
           }
         </ListGroup>
+        <Button className="deleteBarcart" onClick={() => this.props.deleteBarCart()}>
+          Delete Bar Cart
+        </Button>
       </>
     );
   }

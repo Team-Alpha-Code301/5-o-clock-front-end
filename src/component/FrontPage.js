@@ -10,9 +10,11 @@ class FrontPage extends React.Component {
 
   render() {
 
+    
+
     return (
       <>
-        <Header/>
+        <Header />
         <Carousel>
           <Carousel.Item >
             <img
@@ -127,7 +129,7 @@ class FrontPage extends React.Component {
         <Link to="/barCart">
           <Button className="ExploreButton">Explore Cocktails</Button>
         </Link>
-        <Footer/>
+        <Footer />
       </>
     );
   }
