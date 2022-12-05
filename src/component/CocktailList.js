@@ -11,7 +11,6 @@ class CocktailsList extends React.Component {
   }
 
   render() {
-
     return (
       <>
         <Col>

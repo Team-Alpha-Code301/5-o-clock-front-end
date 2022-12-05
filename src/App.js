@@ -6,7 +6,6 @@ import FrontPage from './component/FrontPage';
 import Cocktails from './component/Cocktails';
 import AboutUs from './component/AboutUs';
 import Profile from './component/Profile';
-import BarCart from './component/BarCart';
 import './App.css';
 import {
   BrowserRouter as Router,
@@ -32,15 +31,10 @@ class App extends React.Component {
 
               <Route
                 exact path="/barCart"
-                element={<BarCart />}
-              >
-              </Route>
-
-              <Route
-                exact path="/Cocktails"
                 element={<Cocktails />}
               >
               </Route>
+              
               <Route
                 exact path="/about"
                 element={<AboutUs />}

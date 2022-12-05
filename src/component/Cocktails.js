@@ -20,21 +20,22 @@ class Cocktails extends React.Component {
       isModalShown: false,
       modalImage: '',
       modalName: '',
-      selectedIngredient: ''
+      barCartItems: []
     };
   }
 
+  ////////// CRUD //////////
+  //GET- Get User
   findUser = async () => {
-    // get user by ID to see if they exist
-    let email = this.props.auth0.user.email;
-    let foundUser = await axios.get(`${process.env.REACT_APP_SERVER}/users/${email}`);
-    // console.log('here is foundUser', foundUser);
+    try {
+      const res = await this.props.auth0.getIdTokenClaims();
+      const jwt = res.__raw;
+      if (this.props.auth0.isAuthenticated) {
     // if user exists, put their barCartItems into state
     // if not, create new user with empty array of barCartItems
-    try {
-      if (this.props.auth0.isAuthenticated) {
-        const res = await this.props.auth0.getIdTokenClaims();
-        const jwt = res.__raw;
+      // get user by ID to see if they exist
+      let email = this.props.auth0.user.email;
+      let foundUser = await axios.get(`${process.env.REACT_APP_SERVER}/users/${email}`, {headers: {'Authorization': `Bearer ${jwt}`}});
         //create user if no user found in db
         if(!foundUser.data.email){
           console.log('no user found');
@@ -42,7 +43,7 @@ class Cocktails extends React.Component {
             method: 'post',
             data: {
               email: this.props.auth0.user.email,
-              barCartItems: [this.state.barCartItems]
+              barCartItems: [this.state.barCartItems] /// NULL!!!!
             },
             baseURL: process.env.REACT_APP_SERVER,
             url: `/users`,
@@ -66,20 +67,7 @@ class Cocktails extends React.Component {
     }
   };
 
-  showModal = (image, name) => {
-    this.setState({
-      isModalShown: true,
-      modalImage: image,
-      modalName: name
-    });
-  };
-
-  hideModal = () => {
-    this.setState({
-      isModalShown: false
-    });
-  };
-
+  //PUT - Add new ingredient to database
   addToCart = async (ingredient) => {
     try {
       if (this.props.auth0.isAuthenticated) {
@@ -108,16 +96,12 @@ class Cocktails extends React.Component {
     }
   }
 
+  //GET - Get API drink data
   getCocktails = async (ingredient) => {
-
     try {
       if (this.props.auth0.isAuthenticated) {
 
-        // get the token from Auth0
         const res = await this.props.auth0.getIdTokenClaims();
-
-        // extract the token from the response
-        // MUST use double underscore
         const jwt = res.__raw;
 
         let config = {
@@ -140,15 +124,11 @@ class Cocktails extends React.Component {
     }
   };
 
+  //GET - Get API drink detail data
   getModalCocktail = async (cocktail) => {
     try {
       if (this.props.auth0.isAuthenticated) {
-
-        // get the token from Auth0
         const res = await this.props.auth0.getIdTokenClaims();
-
-        // extract the token from the response
-        // MUST use double underscore
         const jwt = res.__raw;
         let config = {
           method: 'get',
@@ -168,28 +148,125 @@ class Cocktails extends React.Component {
       console.log('we have an error: ', error.response.data);
     }
   }
+
+  //GET - Get barCartItems from MongoDB after hit 'submit' button.
+  getBarCart = async() =>{
+    try {
+      if (this.props.auth0.isAuthenticated) {
+        const res = await this.props.auth0.getIdTokenClaims();
+        const jwt = res.__raw;
+        let config = {
+          method: 'get',
+          baseURL: process.env.REACT_APP_SERVER,
+          url: `/users/${this.props.auth0.user.email}`,
+          headers: {
+            'Authorization': `Bearer ${jwt}`
+          }
+        };
+        await axios(config)
+          .then(res => {
+            console.log('inside barcart:', res.data);
+
+            this.setState({
+              barCartItems: res.data.barCartItems
+            });
+          })
+      }
+    } catch (e) {
+      console.log('GET Error: ', e.response.data);
+    }
+  }
+
+  // //DELETE 
+  // deleteBarCart = async () => {
+  //   let email = this.props.auth0.user.email;
+  //   try {
+  //     if (this.props.auth0.isAuthenticated) {
+
+  //       const res = await this.props.auth0.getIdTokenClaims();
+  //       const jwt = res.__raw;
+
+  //       let config = {
+  //         method: 'delete',
+  //         baseURL: process.env.REACT_APP_SERVER,
+  //         url: `/users/${email}`,
+  //         headers: {
+  //           'Authorization': `Bearer ${jwt}`
+  //         }
+  //       };
+  //       await axios(config);
+  //     }
+  //   } catch (e) {
+  //     console.log('DELETE Error: ', e.response.data);
+  //   }
+  // }
+
+  // PUT - Delete an ingredient and update to mongoDB
+  deleteOneIngredient = async(index) =>{
+    try {
+      let newBarCartItems =  this.state.barCartItems.filter((element,i) => i !== index)
+      if (this.props.auth0.isAuthenticated) {
+        const res = await this.props.auth0.getIdTokenClaims();
+        const jwt = res.__raw;
+        console.log("Update barCartItems to database");
+        let config = {
+          method: 'put',
+          data: {
+            email: this.props.auth0.user.email,
+            barCartItems: newBarCartItems
+          },
+          baseURL: process.env.REACT_APP_SERVER,
+          url: `/users/${this.props.auth0.user.email}`,
+          headers: {
+            'Authorization': `Bearer ${jwt}`
+          }
+        };
+        await axios(config);
+        this.setState({barCartItems: newBarCartItems})
+      }
+    } catch (e) {
+      console.log('Cannot patch. ', e.response.data);
+    }
+  }
+
+  ////////// CRUD - end  //////////
   
-  handleGetCocktails = (e) => {
+  
+  handleGetCocktails = async(e) => {
     e.preventDefault();
     let selectedIngredient = e.target.ingredient.value;
     this.getCocktails(selectedIngredient);
     this.addToCart(selectedIngredient);
+    this.getBarCart();
+    
+  };
+
+  showModal = (image, name) => {
     this.setState({
-      selectedIngredient: selectedIngredient
+      isModalShown: true,
+      modalImage: image,
+      modalName: name
     });
   };
-  
+
+  hideModal = () => {
+    this.setState({
+      isModalShown: false
+    });
+  };
+
   componentDidMount = () => {
     this.getCocktails();
     this.findUser();
     this.getModalCocktail();
+    this.getBarCart();
   };
   
   render() {
     return (
       <>
         <Header />
-        
+
         <CocktailForm
           handleGetCocktails={this.handleGetCocktails}
           cocktailsData={this.state.cocktails}
@@ -198,9 +275,7 @@ class Cocktails extends React.Component {
           getModalCocktail={this.getModalCocktail}
         />
 
-        {this.state.selectedIngredient && <BarCart 
-          selectedIngredient={this.state.selectedIngredient}
-        />}
+          <BarCart barCartItems={this.state.barCartItems} deleteOneIngredient={this.deleteOneIngredient}/>
 
         <CocktailsModal
           isModalShown={this.state.isModalShown}
@@ -209,7 +284,6 @@ class Cocktails extends React.Component {
           img={this.state.modalImage}
           name={this.state.modalName}
         />
-
         <Footer />
       </>
     );
