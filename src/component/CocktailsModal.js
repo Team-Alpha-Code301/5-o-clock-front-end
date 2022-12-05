@@ -1,7 +1,6 @@
 import React from 'react';
 import { Button, Modal } from 'react-bootstrap';
 import '../App.css';
-import BarCart from './BarCart';
 
 class CocktailsModal extends React.Component {
 
