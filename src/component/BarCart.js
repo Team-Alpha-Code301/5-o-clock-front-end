@@ -14,7 +14,7 @@ class BarCart extends React.Component {
               <ListGroup.Item key={i}>
                 {item}
                 <Button className="float-end" variant="danger" onClick={() => this.props.deleteOneIngredient(i)}> 
-                  Delete 
+                  Remove 
                 </Button>
               </ListGroup.Item> : <div key={i}></div>
             ))
