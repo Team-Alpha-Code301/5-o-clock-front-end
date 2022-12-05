@@ -10,7 +10,7 @@ class Header extends React.Component {
       <Navbar className="links">
         <Navbar.Brand className="webName">5-O-Clock</Navbar.Brand>
         <NavItem><Link to="/" className="nav-link" id="link">Home</Link></NavItem>
-        <NavItem><Link to="/barCart" className="nav-link" id="link">Bar Cart</Link></NavItem>
+        <NavItem><Link to="/cocktails" className="nav-link" id="link">Bar Cart</Link></NavItem>
         <NavItem><Link to="/about" className="nav-link" id="link">About us</Link></NavItem>
         <NavItem><Link to="/profile" className="nav-link" id="link">Profile</Link></NavItem>
         <AuthButtons/>
