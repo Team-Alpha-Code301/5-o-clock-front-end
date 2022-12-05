@@ -31,19 +31,20 @@ class Cocktails extends React.Component {
       const res = await this.props.auth0.getIdTokenClaims();
       const jwt = res.__raw;
       if (this.props.auth0.isAuthenticated) {
-    // if user exists, put their barCartItems into state
-    // if not, create new user with empty array of barCartItems
-      // get user by ID to see if they exist
-      let email = this.props.auth0.user.email;
-      let foundUser = await axios.get(`${process.env.REACT_APP_SERVER}/users/${email}`, {headers: {'Authorization': `Bearer ${jwt}`}});
+        // if user exists, put their barCartItems into state
+        // if not, create new user with empty array of barCartItems
+        // get user by ID to see if they exist
+        let email = this.props.auth0.user.email;
+        let foundUser = await axios.get(`${process.env.REACT_APP_SERVER}/users/${email}`, { headers: { 'Authorization': `Bearer ${jwt}` } });
+        console.log(foundUser.data);
         //create user if no user found in db
-        if(!foundUser.data.email){
+        if (!foundUser.data.email) {
           console.log('no user found');
           let config = {
             method: 'post',
             data: {
               email: this.props.auth0.user.email,
-              barCartItems: [this.state.barCartItems] /// NULL!!!!
+              barCartItems: [this.state.barCartItems]
             },
             baseURL: process.env.REACT_APP_SERVER,
             url: `/users`,
@@ -59,7 +60,7 @@ class Cocktails extends React.Component {
           user: {
             email: this.props.auth0.user.email,
             barCartItems: [this.state.barCartItems]
-          }
+          },
         });
       }
     } catch (e) {
@@ -113,7 +114,7 @@ class Cocktails extends React.Component {
             'Authorization': `Bearer ${jwt}`
           }
         };
-        
+
         let cocktailResults = await axios(config);
         this.setState({
           cocktails: cocktailResults.data
@@ -150,7 +151,7 @@ class Cocktails extends React.Component {
   }
 
   //GET - Get barCartItems from MongoDB after hit 'submit' button.
-  getBarCart = async() =>{
+  getBarCart = async () => {
     try {
       if (this.props.auth0.isAuthenticated) {
         const res = await this.props.auth0.getIdTokenClaims();
@@ -177,34 +178,44 @@ class Cocktails extends React.Component {
     }
   }
 
-  // //DELETE 
-  // deleteBarCart = async () => {
-  //   let email = this.props.auth0.user.email;
-  //   try {
-  //     if (this.props.auth0.isAuthenticated) {
+  //DELETE 
+  deleteBarCart = async () => {
+    let email = this.props.auth0.user.email;
+    console.log("hello");
+    console.log(email);
+    try {
+      if (this.props.auth0.isAuthenticated) {
 
-  //       const res = await this.props.auth0.getIdTokenClaims();
-  //       const jwt = res.__raw;
-
-  //       let config = {
-  //         method: 'delete',
-  //         baseURL: process.env.REACT_APP_SERVER,
-  //         url: `/users/${email}`,
-  //         headers: {
-  //           'Authorization': `Bearer ${jwt}`
-  //         }
-  //       };
-  //       await axios(config);
-  //     }
-  //   } catch (e) {
-  //     console.log('DELETE Error: ', e.response.data);
-  //   }
-  // }
+        const res = await this.props.auth0.getIdTokenClaims();
+        const jwt = res.__raw;
+        
+        let config = {
+          method: 'delete',
+          baseURL: process.env.REACT_APP_SERVER,
+          url: `/users/${email}`,
+          headers: {
+            'Authorization': `Bearer ${jwt}`
+          }
+        };
+        await axios(config)
+        // console.log('inside barcart:', res.data);
+        .then(res => {
+          console.log('inside barcart:', res.data);
+          this.setState({
+            barCartItems: []
+          });
+        })
+        this.findUser();
+      }
+    } catch (e) {
+      console.log('DELETE Error: ', e.response.data);
+    }
+  }
 
   // PUT - Delete an ingredient and update to mongoDB
-  deleteOneIngredient = async(index) =>{
+  deleteOneIngredient = async (index) => {
     try {
-      let newBarCartItems =  this.state.barCartItems.filter((element,i) => i !== index)
+      let newBarCartItems = this.state.barCartItems.filter((element, i) => i !== index)
       if (this.props.auth0.isAuthenticated) {
         const res = await this.props.auth0.getIdTokenClaims();
         const jwt = res.__raw;
@@ -222,7 +233,9 @@ class Cocktails extends React.Component {
           }
         };
         await axios(config);
-        this.setState({barCartItems: newBarCartItems})
+        this.setState({
+          barCartItems: newBarCartItems
+        })
       }
     } catch (e) {
       console.log('Cannot patch. ', e.response.data);
@@ -230,15 +243,15 @@ class Cocktails extends React.Component {
   }
 
   ////////// CRUD - end  //////////
-  
-  
-  handleGetCocktails = async(e) => {
+
+
+  handleGetCocktails = async (e) => {
     e.preventDefault();
     let selectedIngredient = e.target.ingredient.value;
     this.getCocktails(selectedIngredient);
     this.addToCart(selectedIngredient);
     this.getBarCart();
-    
+
   };
 
   showModal = (image, name) => {
@@ -261,8 +274,11 @@ class Cocktails extends React.Component {
     this.getModalCocktail();
     this.getBarCart();
   };
-  
+
   render() {
+
+    console.log(this.state.barCartItems);
+
     return (
       <>
         <Header />
@@ -275,7 +291,13 @@ class Cocktails extends React.Component {
           getModalCocktail={this.getModalCocktail}
         />
 
-          <BarCart barCartItems={this.state.barCartItems} deleteOneIngredient={this.deleteOneIngredient}/>
+        {this.state.barCartItems ?
+        <BarCart
+          barCartItems={this.state.barCartItems}
+          deleteOneIngredient={this.deleteOneIngredient}
+          deleteBarCart={this.deleteBarCart}
+        /> : null
+        }
 
         <CocktailsModal
           isModalShown={this.state.isModalShown}

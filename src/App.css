@@ -4,6 +4,10 @@
   color:aliceblue;
 }
 
+.webName:hover {
+  color: white;
+}
+
 .links {
   display:flex;
   justify-content: space-between;
@@ -30,6 +34,10 @@
 .footerText {
   color: white;
   font-weight: bolder;
+}
+
+.footerText:hover {
+  color: white;
 }
 
 .ExploreButton {
