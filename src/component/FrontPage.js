@@ -124,7 +124,7 @@ class FrontPage extends React.Component {
             </Carousel.Caption>
           </Carousel.Item>
         </Carousel>
-        <Link to="/Cocktails">
+        <Link to="/barCart">
           <Button className="ExploreButton">Explore Cocktails</Button>
         </Link>
         <Footer/>
