@@ -8,7 +8,7 @@ class AboutUs extends React.Component {
   render() {
 
     return (
-      <>
+      <div className="aboutUs">
         <Header />
         <section>
           <h3>Gordon P. Reilley Jr</h3>
@@ -48,11 +48,11 @@ class AboutUs extends React.Component {
           <h3>Don Choi</h3>
           <img src="https://avatars.githubusercontent.com/u/113468027?v=4" alt="Don" />
           <p>
-            My name is Don Choi and I am a software developer and currently serving in Army as a Reservist, too. I am a person who is dedicated to solve a problem that is given to me, but at the same time, I am also a person who knows when to put my hands off and find a chance to come back to solve the problem, and it naturally made me able to spend time effectively.
+            My name is Don Choi and I am a software developer and currently in Army Reserve as Information Technology Specialist, too. I am a person who is dedicated to solve a problem that is given to me, but at the same time, I am also a person who knows when to put my hands off when I am stuck and come back to it, and it naturally made me able to spend time effectively. The strength that I can think of myself is optimism, because whenever I face a problem, I am able to solve a blocker without panicing.
           </p>
         </section>
         <Footer />
-      </>
+      </div>
     );
   }
 }

@@ -9,10 +9,10 @@ class CocktailsModal extends React.Component {
   };
 
   render() {
-
-    // let ingredient = this.props.displayCocktail.ingredients.map((item, idx) => {
-    //   return <ul key={idx}>{item[idx]}</ul>
-    // })
+    console.log(this.props.displayCocktail);
+    let ingredient = this.props.displayCocktail.ingredients ? this.props.displayCocktail.ingredients.map((item, idx) => {
+      return <ul key={idx}>{item}</ul>
+    }) : []
 
     return (
       <>
@@ -27,7 +27,8 @@ class CocktailsModal extends React.Component {
               alt={this.props.name}
               width='466px'
             />
-            <div>{this.props.displayCocktail.ingredients}</div>
+            <div>{ingredient}</div>
+            {/* <div>{this.props.displayCocktail.ingredients}</div> */}
             <div>{this.props.displayCocktail.instruction}</div>
           </Modal.Body>
 

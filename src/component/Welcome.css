@@ -42,22 +42,50 @@
 
 .formSubmit {
   color:white;
+  width: 100%;
 }
 
 .formSubmitButton {
   background-color: black;
   color:rgb(205, 205, 101);
   font-family: cursive;
-  border: none;
+  border-color:rgb(255, 255, 0);
   display: flex;
   justify-content: center;
   align-items: center;
+  margin: auto;
 }
+
+/* .formSubmit {
+  color:white;
+}
+
+.formSubmitButton {
+  background-color: black;
+  color:rgb(205, 205, 101);
+  font-family: cursive;
+} */
 
 .formSubmitButton:hover {
   background-color: black;
   color: rgb(255, 255, 0);
   font-weight: bolder;
+}
+
+.deleteButton{
+  color:white;
+  width: 100%;
+}
+
+.deleteBarcart {
+  background-color: black;
+  color:rgb(205, 205, 101);
+  font-family: cursive;
+  border-color:rgb(255, 255, 0);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: auto;
 }
 
 .Welcome {
@@ -75,6 +103,10 @@
   to{background-color:pink}
 }
 
+h2 {
+  color:white;
+}
+
 h3 {
   color:white;
 }
@@ -87,4 +119,20 @@ p {
   display: flex;
   justify-content: right;
   text-align: right;
+}
+
+.bg {
+  background-image: url('../image/bar.jpg');
+  height: 100vh;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.aboutUs {
+  background-image: url('../image/frontPage.jpg');
+  height: 100vh;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
 }

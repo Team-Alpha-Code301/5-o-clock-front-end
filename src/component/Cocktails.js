@@ -16,7 +16,7 @@ class Cocktails extends React.Component {
     this.state = {
       cocktails: [],
       user: {},
-      displayCocktail: [],
+      displayCocktail: {},
       isModalShown: false,
       modalImage: '',
       modalName: '',
@@ -188,7 +188,7 @@ class Cocktails extends React.Component {
 
         const res = await this.props.auth0.getIdTokenClaims();
         const jwt = res.__raw;
-        
+
         let config = {
           method: 'delete',
           baseURL: process.env.REACT_APP_SERVER,
@@ -198,13 +198,13 @@ class Cocktails extends React.Component {
           }
         };
         await axios(config)
-        // console.log('inside barcart:', res.data);
-        .then(res => {
-          console.log('inside barcart:', res.data);
-          this.setState({
-            barCartItems: []
-          });
-        })
+          // console.log('inside barcart:', res.data);
+          .then(res => {
+            console.log('inside barcart:', res.data);
+            this.setState({
+              barCartItems: []
+            });
+          })
         this.findUser();
       }
     } catch (e) {
@@ -275,38 +275,42 @@ class Cocktails extends React.Component {
     this.getBarCart();
   };
 
+
+
   render() {
 
     console.log(this.state.barCartItems);
 
     return (
       <>
-        <Header />
+        <div className="bg">
+          <Header />
 
-        <CocktailForm
-          handleGetCocktails={this.handleGetCocktails}
-          cocktailsData={this.state.cocktails}
-          modalCocktail={this.state.displayCocktail}
-          showModal={this.showModal}
-          getModalCocktail={this.getModalCocktail}
-        />
+          <CocktailForm
+            handleGetCocktails={this.handleGetCocktails}
+            cocktailsData={this.state.cocktails}
+            modalCocktail={this.state.displayCocktail}
+            showModal={this.showModal}
+            getModalCocktail={this.getModalCocktail}
+          />
 
-        {this.state.barCartItems ?
-        <BarCart
-          barCartItems={this.state.barCartItems}
-          deleteOneIngredient={this.deleteOneIngredient}
-          deleteBarCart={this.deleteBarCart}
-        /> : null
-        }
+          {this.state.barCartItems ?
+            <BarCart
+              barCartItems={this.state.barCartItems}
+              deleteOneIngredient={this.deleteOneIngredient}
+              deleteBarCart={this.deleteBarCart}
+            /> : null
+          }
 
-        <CocktailsModal
-          isModalShown={this.state.isModalShown}
-          displayCocktail={this.state.displayCocktail}
-          hideModal={this.hideModal}
-          img={this.state.modalImage}
-          name={this.state.modalName}
-        />
-        <Footer />
+          <CocktailsModal
+            isModalShown={this.state.isModalShown}
+            displayCocktail={this.state.displayCocktail}
+            hideModal={this.hideModal}
+            img={this.state.modalImage}
+            name={this.state.modalName}
+          />
+          <Footer />
+        </div>
       </>
     );
   }
