@@ -40,16 +40,52 @@
   color: white;
 }
 
+.Explore {
+  color:white;
+  width: 100%;
+}
+
 .ExploreButton {
   color:rgb(243, 207, 140);
   background-color: black;
-  border: none;
+  font-family: cursive;
+  border-color:rgb(243, 207, 140);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: auto;
 }
 
 .ExploreButton:hover {
   color:orange;
   background-color: black;
   font-weight: bolder;
+}
+
+.barCartList {
+  position: fixed;
+  top:25%;
+  right: 0;
+  width: 25%;
+  opacity: 70%;
+}
+
+.footerText {
+  margin: auto;
+}
+
+.footerNav {
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+}
+
+.frontPage {
+  background-image: url('./image/frontPage.jpg');
+  height: 100vh;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
 }
 
 li {

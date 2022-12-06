@@ -13,7 +13,7 @@ class FrontPage extends React.Component {
     
 
     return (
-      <>
+      <div className="frontPage">
         <Header />
         <Carousel>
           <Carousel.Item >
@@ -90,7 +90,7 @@ class FrontPage extends React.Component {
             />
 
             <Carousel.Caption>
-              <h3>Spritz</h3>
+              <h3>Aperol Spritz</h3>
               <ul>
                 <li>1 part Aperol</li>
                 <li>2 parts Prosecco</li>
@@ -126,11 +126,11 @@ class FrontPage extends React.Component {
             </Carousel.Caption>
           </Carousel.Item>
         </Carousel>
-        <Link to="/barCart">
+        <Link className="Explore" to="/barCart">
           <Button className="ExploreButton">Explore Cocktails</Button>
         </Link>
         <Footer />
-      </>
+      </div>
     );
   }
 }
